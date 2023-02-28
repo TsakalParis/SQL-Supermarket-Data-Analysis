@@ -1,0 +1,8 @@
+%sql
+--top 10 products with the most reorders
+SELECT order_products.product_id, products.product_name, SUM(order_products.reordered) AS reordered_sum
+FROM order_products
+INNER JOIN products ON order_products.product_id = products.product_id
+GROUP BY order_products.product_id, products.product_name
+ORDER BY sum(order_products.reordered) DESC
+LIMIT 10;
